@@ -6,7 +6,7 @@ import BoardStore from './board-store';
 import PieceStore from './piece-store';
 import pieceSetter from '../modules/piece-setter';
 
-const { states, actions } = AppConstants;
+const { states, actions, events } = AppConstants;
 
 let _currentState = null;
 let _interval = null;
@@ -78,5 +78,11 @@ PieceStore.addChangeListener(() => {
 BoardStore.addChangeListener(() => {
   GameStore.emitChange();
 });
+
+PieceStore.on(events.PLAYER_LOST, () => {
+  global.clearInterval(_interval);
+  _currentState = states.PLAYER_LOST;
+  GameStore.emitChange();
+})
 
 export default GameStore;

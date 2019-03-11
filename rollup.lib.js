@@ -15,7 +15,7 @@ export default {
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      plugins: ['external-helpers', 'lodash']
+      plugins: ['lodash']
     }),
     resolve({
       browser: true,

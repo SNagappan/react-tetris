@@ -5,6 +5,7 @@ import Gameboard from './gameboard';
 import ScoreStore from '../stores/score-store';
 import HeldPiece from './held-piece';
 import PieceQueue from './piece-queue';
+import GameStore from '../stores/game-store';
 
 function getScore() {
   return {
@@ -23,12 +24,18 @@ export default class Tetris extends React.Component {
     this.state = getScore();
   }
 
+  _updateGameState = () => {
+    this.setState({ gameState: GameStore.getCurrentState() })
+  }
+
   componentWillMount() {
     ScoreStore.addChangeListener(this._onChange);
+    GameStore.addChangeListener(this._updateGameState);
   }
 
   componentWillUnmount() {
     ScoreStore.removeChangeListener(this._onChange);
+    GameStore.removeChangeListener(this._updateGameState);
   }
 
   _onChange = () => {
@@ -36,14 +43,15 @@ export default class Tetris extends React.Component {
   };
 
   render() {
-    const { points, linesCleared } = this.state;
+    const { points, linesCleared, gameState } = this.state;
 
     return this.props.children({
       HeldPiece,
       Gameboard,
       PieceQueue,
       points,
-      linesCleared
+      linesCleared,
+      gameState
     });
   }
 }

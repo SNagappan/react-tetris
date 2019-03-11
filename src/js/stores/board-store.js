@@ -56,7 +56,7 @@ const BoardStore = _.extend(
               boardY < AppConstants.GAME_HEIGHT
             ) {
               // make sure it's available
-              if (_gameBoard[boardY][boardX]) {
+              if (_gameBoard[boardY] && _gameBoard[boardY][boardX]) {
                 // that square is taken by the board already
                 return false;
               }
