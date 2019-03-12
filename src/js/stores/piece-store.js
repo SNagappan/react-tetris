@@ -184,7 +184,7 @@ function emitChangeIf(val) {
   if (val) PieceStore.emitChange();
 }
 
-const queue = new PieceQueue(5);
+const queue = new PieceQueue(3);
 
 const initialPosition = (() => {
   const somePiece = queue.getNext();

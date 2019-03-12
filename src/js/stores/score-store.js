@@ -26,16 +26,25 @@ const ScoreStore = _.extend(
   EventEmitter
 );
 
-const pointsPerLine = 100;
 BoardStore.on(events.LINE_CLEARED, additionalLines => {
   linesCleared += additionalLines;
 
-  // what's this called?
-  if (additionalLines === 4) {
-    ScoreStore.addPoints(pointsPerLine * 10);
-  } else {
-    ScoreStore.addPoints(additionalLines * pointsPerLine);
+  var points
+  switch(additionalLines) {
+    case 4:
+      points = 1200
+      break;
+    case 3:
+      points = 300
+      break;
+    case 2:
+      points = 100
+      break;
+    default:
+      points = 40
   }
+  ScoreStore.addPoints(points)
+
 });
 
 export default ScoreStore;
