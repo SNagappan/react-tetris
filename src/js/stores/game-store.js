@@ -38,6 +38,10 @@ const GameStore = _.extend(
       return _currentState;
     },
 
+    getCurrentPiece() {
+      return PieceStore.getPieceData().piece
+    },
+
     start() {
       _interval = global.setInterval(() => {
         PieceStore.tick();
