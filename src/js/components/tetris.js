@@ -45,7 +45,6 @@ export default class Tetris extends React.Component {
   render() {
     const { points, linesCleared, gameState } = this.state;
     const currentPiece = GameStore.getCurrentPiece()
-    console.log(currentPiece)
 
     return this.props.children({
       HeldPiece,
